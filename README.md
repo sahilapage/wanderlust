@@ -32,7 +32,7 @@ Other Tools: Express-session, MongoStore, Method-Override, Multer
 
 🚀 Installation & Setup
 1. Clone the repository
-git clone https://github.com/your-username/wanderlust.git
+git clone https://github.com/sahilapage/wanderlust.git
 cd wanderlust
 
 2. Install dependencies
