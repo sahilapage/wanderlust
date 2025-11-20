@@ -1,0 +1,129 @@
+<% layout("/layouts/boilerplate") -%>
+<body>
+  <div class="row mt-3">
+
+<div class="row top-bar">
+    <div class="filters-container col-md-9">
+  <button class="scroll-btn left" id="scrollLeft"><i class="fa-solid fa-chevron-left"></i></button>
+
+  <div class="filters" id="filters">
+    <a href="/listings/category/Trending"><div class="filter"><i class="fa-solid fa-fire"></i><p>Trending</p></div></a>
+    <a href="/listings/category/Rooms"><div class="filter"><i class="fa-solid fa-bed"></i><p>Rooms</p></div></a>
+    <a href="/listings/categoryFarms"><div class="filter"><i class="fa-solid fa-tractor"></i><p>Farms</p></div></a>
+    <a href="/listings/category/Iconic-cities"><div class="filter"><i class="fa-solid fa-tree-city"></i><p>Iconic cities</p></div></a>
+    <a href="/listings/category/Beaches"><div class="filter"><i class="fa-solid fa-umbrella-beach"></i><p>Beaches</p></div></a>
+    <a href="/listings/category/Lakefront"><div class="filter"><i class="fa-solid fa-water"></i><p>Lakefront</p></div></a>
+    <a href="/listings/category/Cabins"><div class="filter"><i class="fa-solid fa-house"></i><p>Cabins</p></div></a>
+    <a href="/listings/category/Mountains"><div class="filter"><i class="fa-solid fa-mountain"></i><p>Mountains</p></div></a>
+    <a href="/listings/category/Castles"><div class="filter"><i class="fa-brands fa-fort-awesome"></i><p>Castles</p></div></a>
+    <a href="/listings/category/Camping"><div class="filter"><i class="fa-solid fa-campground"></i><p>Camping</p></div></a>
+    <a href="/listings/category/Jungles"><div class="filter"><i class="fa-solid fa-tree"></i><p>Jungles</p></div></a>
+    <a href="/listings/category/Arctic"><div class="filter"><i class="fa-solid fa-snowflake"></i><p>Arctic</p></div></a>
+    <a href="/listings/category/Deserts"><div class="filter"><i class="fa-solid fa-temperature-full"></i><p>Deserts</p></div></a>
+  </div>
+
+  <button class="scroll-btn right" id="scrollRight"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+<div class="tax-toggle col-md-3 mt-3">
+  <div class="form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+</div>
+</div>
+</div>
+
+<div class="row mb-1 mt-3">
+  <div class="col-10">
+    <form method="GET" action="/sort">
+      <select name="sort" class="form-select w-auto custom-dropdown" onchange="this.form.submit()">
+        <option value="">Sort By</option>
+        <option value="price_asc" <%= sort === "price_asc" ? "selected" : "" %>>Price: Low to High</option>
+        <option value="price_desc" <%= sort === "price_desc" ? "selected" : "" %>>Price: High to Low</option>
+      </select>
+    </form>
+  </div>
+  <div class="col-2">
+    <form method="GET" action="/listings/wishlisted">
+      <button class="btn btn-dark add-btn">Show Wishlist</button>
+    </form>
+  </div>
+</div>
+
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-4">
+           <% allListings.forEach((listing) => { %>
+    <a href="/listings/<%=listing._id%>" class="listing-link">
+      <div class="card col listing-card">
+      <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+      <div class="card-img-overlay">abcd</div>
+      <div class="card-body">
+      <p class="card-text">
+        <b><%= listing.title %></b> 
+        <br>
+        &#8377; <%=listing.price.toLocaleString("en-IN")%> <i>/night</i>
+        <i class="tax-info">&nbsp;&nbsp;+&nbsp;18% GST</i>
+      </p>
+      </div>
+     </div>
+    </a>
+    <% }); %> 
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filters = document.getElementById('filters');
+    const scrollLeft = document.getElementById('scrollLeft');
+    const scrollRight = document.getElementById('scrollRight');
+    const scrollAmount = 220;
+
+    // function to check scroll position and toggle arrow visibility
+    function updateButtons() {
+      const maxScrollLeft = filters.scrollWidth - filters.clientWidth;
+
+      if (filters.scrollLeft <= 0) {
+        scrollLeft.style.display = 'none';
+      } else {
+        scrollLeft.style.display = 'block';
+      }
+
+      if (filters.scrollLeft >= maxScrollLeft - 1) {
+        scrollRight.style.display = 'none';
+      } else {
+        scrollRight.style.display = 'block';
+      }
+    }
+
+    // Scroll events
+    scrollLeft.addEventListener('click', () => {
+      filters.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    scrollRight.addEventListener('click', () => {
+      filters.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Update buttons on scroll
+    filters.addEventListener('scroll', updateButtons);
+
+    // Initial check on page load
+    updateButtons();
+  });
+</script>
+
+<script>
+  let taxSwitch = document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for(info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+</script>
+
+
+</body>

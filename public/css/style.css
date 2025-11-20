@@ -1,0 +1,254 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.no-style {
+  text-decoration: none;  
+  color: inherit;        
+  cursor: pointer;        
+}
+
+.no-style:hover, .no-style:focus {
+  text-decoration: none;
+  color: inherit;        
+}
+
+.f-info-links a :hover {
+    text-decoration: underline;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.f-info-socials {
+    align-items: center;
+    font-size: 1.35rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.f-info-brand {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.f-info {
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+} 
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.show-img {
+    height: 50vh;
+}
+
+/* Map */
+#map {
+   height:300px;
+   width: 100%;
+}
+
+/* Filter on main page */
+
+.top-bar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filters-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .filters{
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: nowrap;       /* <- no wrapping */
+        gap: 1.5rem;
+        overflow-x: auto;        /* horizontal scrolling */
+        scroll-behavior: smooth;
+        padding: 0.5rem 1rem;    /* spacing so items don't hide behind buttons */
+        align-items: center;
+      }
+      .filters::-webkit-scrollbar { display: none; }
+
+      .filter{
+        text-align: center;
+        min-width: 90px;         /* keep items a consistent size */
+        opacity: 0.8;
+      }
+
+      .filter:hover{ opacity: 1; cursor: pointer; }
+
+      .filter p { font-size: 0.9rem; margin: 0.3rem 0 0 0; }
+
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: white;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 6px 8px;
+        border-radius: 50%;
+        box-shadow: 0 0 6px rgba(0,0,0,0.2);
+        z-index: 10;
+      }
+
+      .scroll-btn.left { left: 6px; }
+
+      .scroll-btn.right { right: 6px; }
+
+.filters a {
+  text-decoration: none;     /* removes underline */
+  color: inherit;            /* keeps the same text/icon color */
+  outline: none;             /* removes focus border */
+  box-shadow: none;          /* removes blue glow */
+}
+
+.filters a:focus,
+.filters a:active,
+.filters a:visited {
+  color: inherit;            /* prevent purple/blue visited color */
+  text-decoration: none;     /* no underline on click */
+  outline: none;
+  box-shadow: none;
+}
+
+.filters a:hover {
+  text-decoration: none;     /* no underline on hover */
+  color: inherit;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-toggle {
+  display: flex;
+  align-items: center;             /* vertical alignment with icons */
+  justify-content: center;         /* center the content horizontally */
+  gap: 0.6rem;                     /* space between text and switch */
+  border: 1px solid #ddd;          /* soft border like Airbnb filters */
+  border-radius: 2rem;             /* curved border */
+  padding: 0.5rem 1.2rem;          /* balanced padding for equal height */
+  background-color: #fff;
+  white-space: nowrap;             /* keep text on one line */
+  font-size: 0.95rem;
+  line-height: 1;                  /* helps with alignment */
+  flex-shrink: 0;                  /* prevents shrinking when scrolling */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  height: 3.25rem;
+}
+
+.tax-toggle:hover {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+
+/* Wishlist */
+.heart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.7rem;        /* size of the heart */
+  color: #fe424d;         /* heart color */
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 0;             /* remove default button padding */
+}
+
+.heart-btn:hover {
+  transform: scale(1.02);
+}
+
+.heart-btn.active i {
+  color: #ff1a4d;
+}
+
+/* .wishlist-btn {
+  border: 1px solid !important;
+  border-radius: 10% !important;
+  background-color: #fe424d !important;
+  color: white !important;
+} */
+
+

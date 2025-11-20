@@ -1,0 +1,34 @@
+const express = require("express");
+const router = express.Router({mergeParams: true});
+const wrapAsync = require("../utils/wrapAsync.js"); 
+const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
+const listingController = require("../controllers/listing.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
+
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))  
+  .post( isLoggedIn,  upload.single('listing[image]'), validateListing, wrapAsync(listingController.createListing));
+
+router.get("/new", isLoggedIn, listingController.renderNewForm);  
+
+router.get("/wishlisted", isLoggedIn, wrapAsync(listingController.showWishListed));
+
+router.get("/category/:category", wrapAsync(listingController.categoryListings));  
+
+router
+  .route("/:id")  
+  .get(wrapAsync(listingController.showListings))
+  .patch(isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
+  
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editListing));
+
+router.get("/:id/wishlist", isLoggedIn, wrapAsync(listingController.addWishlist));
+
+router.get("/:id/dewishlist", isLoggedIn, wrapAsync(listingController.deWishlist));
+
+
+module.exports = router;
